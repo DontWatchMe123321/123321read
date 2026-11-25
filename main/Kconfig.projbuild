@@ -1,0 +1,30 @@
+menu "Node 1 Pump Configuration"
+
+    config NODE1_RELAY_GPIO
+        int "GPIO number connected to relay IN pin"
+        range 0 39
+        default 23
+        help
+            GPIO ESP32 DevKit yang terhubung ke pin IN modul relay.
+            Rekomendasi: 23. Hindari strapping pins 0, 2, 5, 12, 15
+            (GPIO15 = MTDO, mempengaruhi boot log ESP32 classic).
+
+    config NODE1_RELAY_ACTIVE_LOW
+        bool "Relay module is active-LOW (IN low = relay ON)"
+        default y
+        help
+            Banyak modul relay 1-channel murah active-LOW.
+            Default ini mengikuti sketch Arduino lama Node 1
+            (RELAY_ACTIVE_LOW true). Jika pompa terbalik perilakunya
+            (ON saat harusnya OFF), matikan opsi ini di menuconfig.
+
+    config NODE1_RESTORE_ONOFF_AFTER_REBOOT
+        bool "Restore last pump state after reboot"
+        default n
+        help
+            Nonaktif (default, fail-safe): pompa selalu OFF setelah
+            boot/power-loss/restart, state mesh & NVS disinkronkan ke OFF.
+            Aktif: pompa kembali ke state OnOff terakhir yang tersimpan
+            di NVS (untuk kontinuitas jadwal irigasi).
+
+endmenu

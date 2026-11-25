@@ -1,0 +1,23 @@
+# sdkconfig.defaults — Node1_pump (ESP32 DevKit V1 BLE Mesh Node)
+CONFIG_IDF_TARGET="esp32"
+
+# Bluetooth controller (Bluedroid, BT 4.2 feature path — JANGAN aktifkan 50-features)
+CONFIG_BT_ENABLED=y
+CONFIG_BLUEDROID_ENABLED=y
+CONFIG_BT_BLE_42_FEATURES_SUPPORTED=y
+CONFIG_BT_BLE_50_FEATURES_SUPPORTED=n
+
+# BLE Mesh — Node (bukan Provisioner)
+CONFIG_BLE_MESH=y
+CONFIG_BLE_MESH_NODE=y
+CONFIG_BLE_MESH_PROVISIONER=n
+CONFIG_BLE_MESH_PB_ADV=y
+CONFIG_BLE_MESH_PB_GATT=y
+# Hilangkan error "GATT_SendServiceChangeIndication ... menuconfig" saat prov via PB-ADV:
+CONFIG_BT_GATTS_SEND_SERVICE_CHANGE_MANUAL=y
+# Model: Configuration Server tidak butuh flag khusus (bagian inti node).
+# Generic Server models — mengaktifkan Generic OnOff Server API:
+CONFIG_BLE_MESH_GENERIC_SERVER=y
+
+# Persistence: mesh state (netkey/appkey/addr) disimpan otomatis ke NVS
+CONFIG_BLE_MESH_SETTINGS=y
