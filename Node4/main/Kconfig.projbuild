@@ -1,0 +1,28 @@
+# Kconfig untuk Node 4
+menu "Node 4 Wi-Fi Configuration"
+
+    config WIFI_STA_SSID
+        string "Wi-Fi SSID"
+        default "MyRouter"
+        help
+            SSID jaringan Wi-Fi yang digunakan Node 4.
+
+    config WIFI_STA_PASSWORD
+        string "Wi-Fi Password"
+        default ""
+        help
+            Password Wi-Fi (minimal 8 karakter untuk WPA2).
+
+endmenu
+
+menu "Node 4 MQTT Configuration"
+
+    config MQTT_BROKER_URI
+        string "MQTT Broker URI"
+        default "mqtt://192.168.0.101:1883"
+        help
+            URI broker MQTT (Mosquitto di PC).
+            Contoh: mqtt://192.168.0.100:1883
+            Ganti sesuai IP komputer Anda di jaringan yang sama.
+
+endmenu

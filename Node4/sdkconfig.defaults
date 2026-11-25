@@ -1,0 +1,47 @@
+# This file was generated using idf.py save-defconfig or menuconfig [D] key. It can be edited manually.
+# Espressif IoT Development Framework (ESP-IDF) 5.4.0 Project Minimal Configuration
+#
+CONFIG_IDF_TARGET="esp32s3"
+
+#
+# Node 4 Wi-Fi Configuration
+#
+CONFIG_WIFI_STA_SSID="MyRouter"
+CONFIG_WIFI_STA_PASSWORD=""
+# end of Node 4 Wi-Fi Configuration
+
+#
+# BLE Mesh Provisioner (stage 2)
+# Sumber: examples/bluetooth/esp_ble_mesh/provisioner/sdkconfig.defaults (IDF v5.4)
+#
+CONFIG_BT_ENABLED=y
+CONFIG_BT_BTU_TASK_STACK_SIZE=4512
+
+# Wajib: BLE Mesh + Bluedroid pakai jalur HCI legacy (BT 4.2),
+# bukan fitur BLE 5.0 (50-features membuat controller menolak
+# perintah scan/adv mesh dengan HCI status 0x0C)
+CONFIG_BT_BLE_42_FEATURES_SUPPORTED=y
+CONFIG_BT_BLE_50_FEATURES_SUPPORTED=n
+
+# Flash fisik board = 16MB (terdeteksi via esptool flash_id)
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+
+# Custom dual-OTA layout for 16MB flash and the gateway firmware size.
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# BLE Mesh dual-role Provisioner + Node (GATT Proxy Server)
+CONFIG_BLE_MESH=y
+CONFIG_BLE_MESH_NODE=y
+CONFIG_BLE_MESH_PROVISIONER=y
+CONFIG_BLE_MESH_PB_GATT=y
+CONFIG_BLE_MESH_GATT_PROXY_SERVER=y
+
+# Segmented message buffer (provisioning + config messages)
+CONFIG_BLE_MESH_TX_SEG_MSG_COUNT=10
+CONFIG_BLE_MESH_RX_SEG_MSG_COUNT=10
+
+# Model client yang dipakai Node 4
+CONFIG_BLE_MESH_CFG_CLI=y
+CONFIG_BLE_MESH_GENERIC_ONOFF_CLI=y
+CONFIG_BLE_MESH_SETTINGS=y
