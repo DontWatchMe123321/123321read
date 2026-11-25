@@ -1,0 +1,31 @@
+menu "Node 2 Smart Irrigation"
+
+config NODE2_SLEEP_INTERVAL_SEC
+    int "Deep sleep interval (seconds)"
+    range 30 86400
+    default 300
+
+config NODE2_SOIL_ADC_ENABLE
+    bool "Enable soil sensor ADC reads"
+    default y
+    help
+        Enable only after measuring the sensor AO voltage and confirming it
+        does not exceed the ESP32 GPIO input limit.
+
+config NODE2_SOIL_ADC_DRY_RAW
+    int "Soil ADC raw value in dry soil"
+    range 0 4095
+    default 3000
+    depends on NODE2_SOIL_ADC_ENABLE
+    help
+        Replace the default with a measured dry-soil ADC value.
+
+config NODE2_SOIL_ADC_WET_RAW
+    int "Soil ADC raw value in wet soil"
+    range 0 4095
+    default 1500
+    depends on NODE2_SOIL_ADC_ENABLE
+    help
+        Replace the default with a measured wet-soil ADC value.
+
+endmenu
