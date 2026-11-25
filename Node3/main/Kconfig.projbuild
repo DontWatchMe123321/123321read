@@ -1,0 +1,16 @@
+menu "Node 3 status output"
+
+config NODE3_STATUS_LED_GPIO
+    int "Status LED GPIO (-1 disables the LED)"
+    range -1 48
+    default -1
+    help
+        Set this to the GPIO connected to the board LED. The default disables
+        the LED because the exact T-Display board and LED pin are not specified.
+
+config NODE3_STATUS_LED_ACTIVE_LOW
+    bool "Status LED is active-low"
+    depends on NODE3_STATUS_LED_GPIO >= 0
+    default n
+
+endmenu
